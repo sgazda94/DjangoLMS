@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="content">
+        <h4>Lesson Script: {{ lesson.lesson_script }}</h4>
+        <p>Date: {{ lesson.date }}</p>
+        <p>Time: {{ lesson.start_time }} - {{ lesson.end_time }}</p>
+    </div>
+{% endblock %}

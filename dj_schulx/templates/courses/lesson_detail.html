@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h3>Kurs: {{ lesson.course.category}} - {{ lesson.course }}</h3>
+    <p>Tytuł: {{ lesson.title }}</p>
+    <div>Opis: {{ lesson.description | safe }}</div>
+    <div>{{ lesson.content | safe}}</div>
+
+
+{% endblock %}

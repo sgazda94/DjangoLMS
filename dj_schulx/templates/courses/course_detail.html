@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Kurs: {{ course.title }}</h1>
+
+    {% for lesson in lesson_list %}
+        <h4><a href="{{ lesson.get_absolute_url  }}">Lekcja: {{ lesson.title }}</a> </h4>
+        <a type="button" class="btn btn-primary" href="{{ lesson.get_absolute_url}}/update">Update</a>
+        <a type="button" class="btn btn-danger" href="{{ lesson.get_absolute_url}}/delete">Delete</a>
+        <p>Opis: {{ lesson.description }}</p>
+        <br>
+    {%  endfor %}
+
+
+
+{% endblock %}

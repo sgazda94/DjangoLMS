@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Student: {{ student.last_name }}, {{ student.first_name }}</h1>
+    <p>Age: {{ student.age }}</p>
+    <p>E-mail: {{ student.email }}</p>
+    <p>Phone: {{ student.phone_number }}</p>
+    <p>Guardian: <a href="{% url 'guardian-detail' student.guardian.pk %}"> {{ student.guardian }}</a></p>
+
+{% endblock %}

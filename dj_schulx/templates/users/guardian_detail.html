@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1> {{ guardian.last_name }}, {{ guardian.first_name }}</h1>
+    <p>Email: {{ guardian.user }}</p>
+    <p>Tel: {{ guardian.phone_number | phone2numeric }}</p>
+
+    {% for student in student_list %}
+        <h4>Student: {{ student.last_name }}, {{ student.first_name }} - Wiek: {{ student.age }}</h4>
+    {%  endfor %}
+
+    </div>
+{% endblock %}

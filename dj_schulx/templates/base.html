@@ -1,0 +1,50 @@
+{% load static i18n %}
+<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}
+<html lang="{{ LANGUAGE_CODE }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{% block title %}dj_schulx{% endblock title %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Behold My Awesome Project!">
+  <meta name="author" content="sgazda">
+
+  <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
+
+  {% block css %}
+
+  <link href="{% static 'css/main.css' %}" rel="stylesheet">
+  {% endblock %}
+
+  {% block javascript %}
+  <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+  <script defer src="{% static 'js/project.js' %}"></script>
+
+  {% endblock javascript %}
+</head>
+
+<body>
+  {% include "components/header.html" %}
+
+  <section class="columns is-fullheight">
+    {% if user.is_authenticated %}
+    {% include "components/sidebar.html" %}
+    {% endif %}
+
+    <main class="section">
+      <section class="box">
+        {% block content %}
+        <p class="font-bold">Use this document as a way to quick start any new project.</p>
+        {% endblock content %}
+      </section>
+    </main>
+  </section>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script src="https://unpkg.com/hyperscript.org@0.9.4"></script>
+</body>
+
+</html>

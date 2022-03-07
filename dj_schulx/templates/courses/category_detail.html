@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Kategoria: {{ category}}</h1>
+
+    {% for course in courses_list %}
+        <h4><a href="{{ course.get_absolute_url}}">Kurs: {{ course.title }}  ({{ course.owner }})</a> </h4>
+        <p>Opis: {{ course.overview }}</p>
+        <br>
+    {%  endfor %}
+
+
+
+{% endblock %}
