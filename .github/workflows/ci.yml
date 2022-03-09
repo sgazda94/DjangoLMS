@@ -7,19 +7,17 @@ env:
 
 on:
   pull_request:
-    branches: [ "master", "main" ]
-    paths-ignore: [ "docs/**" ]
+    branches: ["master", "main"]
+    paths-ignore: ["docs/**"]
 
   push:
-    branches: [ "master", "main" ]
-    paths-ignore: [ "docs/**" ]
-
+    branches: ["master", "main"]
+    paths-ignore: ["docs/**"]
 
 jobs:
   linter:
     runs-on: ubuntu-latest
     steps:
-
       - name: Checkout Code Repository
         uses: actions/checkout@v3
 
@@ -52,7 +50,6 @@ jobs:
       DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
 
     steps:
-
       - name: Checkout Code Repository
         uses: actions/checkout@v3
 
@@ -71,4 +68,4 @@ jobs:
           pip install -r requirements/local.txt
 
       - name: Test with pytest
-        run:  pytest
+        run: pytest
