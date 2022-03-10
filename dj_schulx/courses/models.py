@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
 from markdownx.models import MarkdownxField
+from markdownx.utils import markdownify
 
 from dj_schulx.users.models import User
 
@@ -19,7 +20,7 @@ class Category(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-        super(Course, self).save(*args, **kwargs)
+        super(Category, self).save(*args, **kwargs)
 
 
 class Course(models.Model):
@@ -48,9 +49,7 @@ class Course(models.Model):
 
 
 class LessonScript(models.Model):
-    course = models.OneToOneField(
-        Course, related_name="modules", on_delete=models.CASCADE
-    )
+    course = models.ForeignKey(Course, related_name="courses", on_delete=models.CASCADE)
     course_order = models.SmallIntegerField()
     title = models.CharField(max_length=200)
     description = models.CharField(max_length=255, blank=True)
@@ -59,7 +58,12 @@ class LessonScript(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def formatted_markdown(self):
+        return markdownify(self.content)
+
     def get_absolute_url(self):
         return reverse(
-            "courses:lesson-detail", kwargs={"pk": self.id, "slug": self.course.slug}
+            "courses:lesson-script-detail",
+            kwargs={"pk": self.id, "slug": self.course.slug},
         )

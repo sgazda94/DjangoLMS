@@ -4,12 +4,11 @@ from markdownx.fields import MarkdownxFormField
 
 
 class LessonScriptForm(forms.ModelForm):
+    content = MarkdownxFormField()
+
     class Meta:
         model = LessonScript
         fields = "__all__"
-        widgets = {
-            "content": MarkdownxFormField(),
-        }
 
 
 # class LessonUpdateForm(forms.Form):

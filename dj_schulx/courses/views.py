@@ -18,26 +18,27 @@ def index(request):
 
 
 # Lesson
-class LessonDetailView(LoginRequiredMixin, DetailView):
+class LessonScriptDetailView(LoginRequiredMixin, DetailView):
     model = LessonScript
+    template_name = "courses/lesson_detail.html"
 
 
-class LessonCreateView(CreateView):
-    model = LessonScript
-    form_class = LessonScriptForm
-    template_name = "courses/create_update_form.html"
-
-
-class LessonUpdateView(LoginRequiredMixin, UpdateView):
+class LessonScriptCreateView(CreateView):
     model = LessonScript
     form_class = LessonScriptForm
-    template_name = "courses/create_update_form.html"
+    template_name = "courses/lesson_script_form.html"
 
 
-class LessonDeleteView(LoginRequiredMixin, DeleteView):
+class LessonScriptUpdateView(LoginRequiredMixin, UpdateView):
+    model = LessonScript
+    form_class = LessonScriptForm
+    template_name = "courses/lesson_script_form.html"
+
+
+class LessonScriptDeleteView(LoginRequiredMixin, DeleteView):
     model = LessonScript
     template_name = "courses/confirm_delete_form.html"
-    success_url = reverse_lazy("accounts:index")
+    success_url = reverse_lazy("users:index")
 
 
 # Category

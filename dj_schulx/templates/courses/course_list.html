@@ -2,9 +2,13 @@
 
 {% block content %}
     <div class="content">
+    {% if object_list %}
     {% for course in object_list %}
-        <h2><a href="{{  course.get_absolute_url }}">[{{ course.category }}] Kurs: {{ course.title }}</a></h2>
+        <h2><a href="{{  course.get_absolute_url }}">[{{ course.category }}] Course: {{ course.title }}</a></h2>
     {% endfor %}
+    {% else %}
+    <h6>You don't have any courses</h6>
+    {% endif %}
 
     </div>
 

@@ -9,19 +9,23 @@ urlpatterns = [
     # lesson
     path(
         "<slug:slug>/lesson/<int:pk>",
-        views.LessonDetailView.as_view(),
-        name="lesson-detail",
+        views.LessonScriptDetailView.as_view(),
+        name="lesson-script-detail",
     ),
-    path("lesson/create/", views.LessonCreateView.as_view(), name="lesson-create"),
+    path(
+        "lesson/create/",
+        views.LessonScriptCreateView.as_view(),
+        name="lesson-script-create",
+    ),
     path(
         "<slug:slug>/lesson/<int:pk>/update/",
-        views.LessonUpdateView.as_view(),
+        views.LessonScriptUpdateView.as_view(),
         name="lesson-update",
     ),
     path(
         "<slug:slug>/lesson/<int:pk>/delete/",
-        views.LessonDeleteView.as_view(),
-        name="lesson-delete",
+        views.LessonScriptDeleteView.as_view(),
+        name="lesson-script-delete",
     ),
     # category
     path(
