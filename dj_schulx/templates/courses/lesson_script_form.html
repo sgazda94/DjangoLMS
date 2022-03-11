@@ -18,7 +18,8 @@
             <div class="field">
                 <label class="label">Lesson</label>
                 <div class="control">
-                    {% render_field form.course_order class="input is-small" style="width: 5em;" | append_attr:"disabled" %}
+                    <!-- {% render_field form.course_order class="input is-small" style="width: 5em;"%} -->
+                    {{ form.course_order |attr:"disabled" |attr:"style:width: 5em" }}
                 </div>
             </div>
             <div class="field">
