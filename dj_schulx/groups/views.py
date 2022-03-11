@@ -1,8 +1,8 @@
-from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 # Create your views here.
 from django.urls import reverse, reverse_lazy
 from django.views.generic import (
@@ -15,8 +15,8 @@ from django.views.generic import (
 from groups.forms import GroupForm, LessonForm
 from groups.models import Group, Lesson
 
-User = get_user_model()
-## Group
+# active_user = get_user_model()
+# Group
 
 
 class GroupDetailView(LoginRequiredMixin, DetailView):
@@ -50,7 +50,7 @@ class GroupDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("accounts:index")
 
 
-## Lesson
+# Lesson
 
 
 class LessonDetailView(LoginRequiredMixin, DetailView):

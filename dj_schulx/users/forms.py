@@ -2,13 +2,13 @@ from allauth.account.forms import SignupForm
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 from django import forms
 from django.contrib.auth import forms as admin_forms
-from django.contrib.auth import get_user_model
+# from django.contrib.auth import get_user_model
 from django.db import transaction
 from django.utils.translation import gettext_lazy as _
 
 from .models import Guardian, Teacher, User
 
-User = get_user_model()
+# active_user = get_user_model()
 
 
 class UserAdminChangeForm(admin_forms.UserChangeForm):
@@ -59,7 +59,7 @@ class GuardianCreationForm(admin_forms.UserCreationForm):
         user = super().save(commit=False)
         user.user_type = 1
         user.save()
-        student = Guardian.objects.create(
+        Guardian.objects.create(
             user=user,
             first_name=self.cleaned_data["first_name"],
             last_name=self.cleaned_data["last_name"],
@@ -86,7 +86,7 @@ class TeacherCreationForm(admin_forms.UserCreationForm):
         user = super().save(commit=False)
         user.user_type = 2
         user.save()
-        teacher = Teacher.objects.create(
+        Teacher.objects.create(
             user=user,
             first_name=self.cleaned_data["first_name"],
             last_name=self.cleaned_data["last_name"],
@@ -100,7 +100,7 @@ class TeacherCreationForm(admin_forms.UserCreationForm):
         return user
 
 
-### taki sam jak GuardianCreationForm tylko user_type = 3 - dziedziczyć?
+# taki sam jak GuardianCreationForm tylko user_type = 3 - dziedziczyć?
 class ManagerCreationForm(admin_forms.UserCreationForm):
     first_name = forms.CharField(max_length=255)
     last_name = forms.CharField(max_length=255)
@@ -114,7 +114,7 @@ class ManagerCreationForm(admin_forms.UserCreationForm):
         user = super().save(commit=False)
         user.user_type = 3
         user.save()
-        student = Guardian.objects.create(
+        Guardian.objects.create(
             user=user,
             first_name=self.cleaned_data["first_name"],
             last_name=self.cleaned_data["last_name"],
