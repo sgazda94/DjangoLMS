@@ -57,7 +57,9 @@ class CourseDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["lesson_list"] = LessonScript.objects.filter(course=self.get_object())
+        context["lesson_list"] = LessonScript.objects.filter(
+            course=self.get_object()
+        ).order_by("course_order")
         return context
 
 

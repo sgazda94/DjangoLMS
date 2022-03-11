@@ -76,6 +76,7 @@ THIRD_PARTY_APPS = [
     "allauth.socialaccount",
     "django_crispy_bulma",
     "markdownx",
+    "widget_tweaks",
 ]
 
 LOCAL_APPS = [
