@@ -1,4 +1,4 @@
-# from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
@@ -15,7 +15,7 @@ from django.views.generic import (
 from dj_schulx.groups.forms import GroupForm, LessonForm
 from dj_schulx.groups.models import Group, Lesson
 
-# active_user = get_user_model()
+active_user = get_user_model()
 # Group
 
 
@@ -82,7 +82,7 @@ def create_lesson(request, group_id):
                 reverse("groups:lesson-detail", kwargs={"pk": lesson.id})
             )
     else:
-        form = LessonForm(user=request.user, group=group_id)
+        form = LessonForm(user=active_user, group=group_id)
 
     return render(request, "groups/create_update_form.html", {"form": form})
 

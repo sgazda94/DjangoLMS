@@ -17,12 +17,12 @@ from .models import Guardian, Manager, Student, Teacher, User
 
 # cookiecutter-django
 
-active_User = get_user_model()
+active_user = get_user_model()
 
 
 class UserDetailView(LoginRequiredMixin, DetailView):
 
-    model = active_User
+    model = active_user
     slug_field = "username"
     slug_url_kwarg = "username"
 
@@ -32,7 +32,7 @@ user_detail_view = UserDetailView.as_view()
 
 class UserUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
 
-    model = active_User
+    model = active_user
     fields = ["name"]
     success_message = _("Information successfully updated")
 
@@ -105,7 +105,7 @@ class GuardianCreateView(CreateView):
     template_name = "users/create_update_form.html"
 
     def form_valid(self, form):
-        user = form.save()
+        form.save()
         return redirect("users:index")
 
 
@@ -134,7 +134,7 @@ class TeacherCreateView(CreateView):
     template_name = "users/create_update_form.html"
 
     def form_valid(self, form):
-        user = form.save()
+        form.save()
         return redirect("users:index")
 
 
@@ -163,7 +163,7 @@ class ManagerCreateView(CreateView):
     template_name = "users/create_update_form.html"
 
     def form_valid(self, form):
-        user = form.save()
+        form.save()
         return redirect("users:index")
 
 

@@ -90,7 +90,7 @@ class Teacher(models.Model):
         super(Teacher, self).delete(*args, **kwargs)
 
 
-## Zastanowić się czy w przyszłości podczas tworzenia Managera nie zrobić przy okazji Teachera dla jednego usera
+# Zastanowić się czy w przyszłości podczas tworzenia Managera nie zrobić przy okazji Teachera dla jednego usera
 class Manager(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     first_name = models.CharField(max_length=255, default="")
