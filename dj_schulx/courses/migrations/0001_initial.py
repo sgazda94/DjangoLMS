@@ -16,40 +16,85 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=200)),
-                ('slug', models.SlugField(max_length=200, unique=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=200)),
+                ("slug", models.SlugField(max_length=200, unique=True)),
             ],
             options={
-                'verbose_name_plural': 'Categories',
-                'ordering': ['title'],
+                "verbose_name_plural": "Categories",
+                "ordering": ["title"],
             },
         ),
         migrations.CreateModel(
-            name='Course',
+            name="Course",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=200)),
-                ('slug', models.SlugField(max_length=200)),
-                ('overview', models.TextField()),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='courses', to='courses.category')),
-                ('owner', models.ForeignKey(on_delete=django.db.models.deletion.RESTRICT, related_name='courses_created', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=200)),
+                ("slug", models.SlugField(max_length=200)),
+                ("overview", models.TextField()),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="courses",
+                        to="courses.category",
+                    ),
+                ),
+                (
+                    "owner",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.RESTRICT,
+                        related_name="courses_created",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'ordering': ['category', 'title'],
+                "ordering": ["category", "title"],
             },
         ),
         migrations.CreateModel(
-            name='LessonScript',
+            name="LessonScript",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('course_order', models.SmallIntegerField()),
-                ('title', models.CharField(max_length=200)),
-                ('description', models.CharField(blank=True, max_length=255)),
-                ('content', markdownx.models.MarkdownxField()),
-                ('course', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='modules', to='courses.course')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("course_order", models.SmallIntegerField()),
+                ("title", models.CharField(max_length=200)),
+                ("description", models.CharField(blank=True, max_length=255)),
+                ("content", markdownx.models.MarkdownxField()),
+                (
+                    "course",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="modules",
+                        to="courses.course",
+                    ),
+                ),
             ],
         ),
     ]

@@ -6,48 +6,52 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0005_auto_20220301_1956'),
+        ("users", "0005_auto_20220301_1956"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='guardian',
-            name='first_name',
-            field=models.CharField(default='', max_length=255),
+            model_name="guardian",
+            name="first_name",
+            field=models.CharField(default="", max_length=255),
         ),
         migrations.AddField(
-            model_name='guardian',
-            name='last_name',
-            field=models.CharField(default='', max_length=255),
+            model_name="guardian",
+            name="last_name",
+            field=models.CharField(default="", max_length=255),
         ),
         migrations.AddField(
-            model_name='manager',
-            name='first_name',
-            field=models.CharField(default='', max_length=255),
+            model_name="manager",
+            name="first_name",
+            field=models.CharField(default="", max_length=255),
         ),
         migrations.AddField(
-            model_name='manager',
-            name='last_name',
-            field=models.CharField(default='', max_length=255),
+            model_name="manager",
+            name="last_name",
+            field=models.CharField(default="", max_length=255),
         ),
         migrations.AddField(
-            model_name='teacher',
-            name='first_name',
-            field=models.CharField(default='', max_length=255),
+            model_name="teacher",
+            name="first_name",
+            field=models.CharField(default="", max_length=255),
         ),
         migrations.AddField(
-            model_name='teacher',
-            name='last_name',
-            field=models.CharField(default='', max_length=255),
+            model_name="teacher",
+            name="last_name",
+            field=models.CharField(default="", max_length=255),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='first_name',
-            field=models.CharField(blank=True, max_length=150, verbose_name='first name'),
+            model_name="user",
+            name="first_name",
+            field=models.CharField(
+                blank=True, max_length=150, verbose_name="first name"
+            ),
         ),
         migrations.AlterField(
-            model_name='user',
-            name='last_name',
-            field=models.CharField(blank=True, max_length=150, verbose_name='last name'),
+            model_name="user",
+            name="last_name",
+            field=models.CharField(
+                blank=True, max_length=150, verbose_name="last name"
+            ),
         ),
     ]

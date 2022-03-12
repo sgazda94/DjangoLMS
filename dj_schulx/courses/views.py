@@ -1,4 +1,3 @@
-from courses.models import Category, Course, LessonScript
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -11,6 +10,7 @@ from django.views.generic import (
 )
 
 from dj_schulx.courses.forms import LessonScriptForm
+from dj_schulx.courses.models import Category, Course, LessonScript
 
 
 def index(request):

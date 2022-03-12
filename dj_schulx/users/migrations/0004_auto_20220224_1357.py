@@ -6,50 +6,50 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0003_guardian_manager_student_teacher'),
+        ("users", "0003_guardian_manager_student_teacher"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='guardian',
-            name='first_name',
+            model_name="guardian",
+            name="first_name",
         ),
         migrations.RemoveField(
-            model_name='guardian',
-            name='last_name',
+            model_name="guardian",
+            name="last_name",
         ),
         migrations.RemoveField(
-            model_name='manager',
-            name='first_name',
+            model_name="manager",
+            name="first_name",
         ),
         migrations.RemoveField(
-            model_name='manager',
-            name='last_name',
+            model_name="manager",
+            name="last_name",
         ),
         migrations.RemoveField(
-            model_name='student',
-            name='first_name',
+            model_name="student",
+            name="first_name",
         ),
         migrations.RemoveField(
-            model_name='student',
-            name='last_name',
+            model_name="student",
+            name="last_name",
         ),
         migrations.RemoveField(
-            model_name='teacher',
-            name='first_name',
+            model_name="teacher",
+            name="first_name",
         ),
         migrations.RemoveField(
-            model_name='teacher',
-            name='last_name',
+            model_name="teacher",
+            name="last_name",
         ),
         migrations.AddField(
-            model_name='user',
-            name='first_name',
-            field=models.CharField(default='', max_length=255),
+            model_name="user",
+            name="first_name",
+            field=models.CharField(default="", max_length=255),
         ),
         migrations.AddField(
-            model_name='user',
-            name='last_name',
-            field=models.CharField(default='', max_length=255),
+            model_name="user",
+            name="last_name",
+            field=models.CharField(default="", max_length=255),
         ),
     ]

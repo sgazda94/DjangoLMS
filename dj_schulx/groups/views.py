@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-# Create your views here.
 from django.urls import reverse, reverse_lazy
 from django.views.generic import (
     CreateView,
@@ -12,8 +11,9 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
-from groups.forms import GroupForm, LessonForm
-from groups.models import Group, Lesson
+
+from dj_schulx.groups.forms import GroupForm, LessonForm
+from dj_schulx.groups.models import Group, Lesson
 
 # active_user = get_user_model()
 # Group

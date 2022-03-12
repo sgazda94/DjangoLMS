@@ -9,45 +9,129 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('courses', '0001_initial'),
-        ('users', '0004_auto_20220224_1357'),
+        ("courses", "0001_initial"),
+        ("users", "0004_auto_20220224_1357"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Group',
+            name="Group",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('week_day', models.SmallIntegerField(choices=[(1, 'Monday'), (2, 'Tuesday'), (3, 'Wednesday'), (4, 'Thursday'), (5, 'Friday'), (6, 'Saturday')])),
-                ('start_time', models.TimeField()),
-                ('end_time', models.TimeField()),
-                ('course', models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='courses.course')),
-                ('students', models.ManyToManyField(blank=True, to='users.Student')),
-                ('teacher', models.OneToOneField(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='users.teacher')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "week_day",
+                    models.SmallIntegerField(
+                        choices=[
+                            (1, "Monday"),
+                            (2, "Tuesday"),
+                            (3, "Wednesday"),
+                            (4, "Thursday"),
+                            (5, "Friday"),
+                            (6, "Saturday"),
+                        ]
+                    ),
+                ),
+                ("start_time", models.TimeField()),
+                ("end_time", models.TimeField()),
+                (
+                    "course",
+                    models.OneToOneField(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="courses.course",
+                    ),
+                ),
+                ("students", models.ManyToManyField(blank=True, to="users.Student")),
+                (
+                    "teacher",
+                    models.OneToOneField(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="users.teacher",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Lesson',
+            name="Lesson",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('number', models.SmallIntegerField(default=None)),
-                ('date', models.DateField(blank=True, null=True)),
-                ('start_time', models.TimeField(blank=True, null=True)),
-                ('end_time', models.TimeField(blank=True, null=True)),
-                ('is_started', models.BooleanField(default=False)),
-                ('is_ended', models.BooleanField(default=False)),
-                ('group', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='groups.group')),
-                ('lesson_script', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='courses.lessonscript')),
-                ('teacher', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='users.teacher')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("number", models.SmallIntegerField(default=None)),
+                ("date", models.DateField(blank=True, null=True)),
+                ("start_time", models.TimeField(blank=True, null=True)),
+                ("end_time", models.TimeField(blank=True, null=True)),
+                ("is_started", models.BooleanField(default=False)),
+                ("is_ended", models.BooleanField(default=False)),
+                (
+                    "group",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="groups.group"
+                    ),
+                ),
+                (
+                    "lesson_script",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="courses.lessonscript",
+                    ),
+                ),
+                (
+                    "teacher",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        to="users.teacher",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='StudentPresence',
+            name="StudentPresence",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('is_present', models.BooleanField(default=False)),
-                ('lesson', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='groups.lesson')),
-                ('student', models.OneToOneField(on_delete=django.db.models.deletion.DO_NOTHING, to='users.student')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("is_present", models.BooleanField(default=False)),
+                (
+                    "lesson",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE, to="groups.lesson"
+                    ),
+                ),
+                (
+                    "student",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.DO_NOTHING,
+                        to="users.student",
+                    ),
+                ),
             ],
         ),
     ]

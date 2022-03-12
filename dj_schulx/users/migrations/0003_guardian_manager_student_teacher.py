@@ -7,51 +7,88 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0002_user_user_type'),
+        ("users", "0002_user_user_type"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Guardian',
+            name="Guardian",
             fields=[
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='users.user')),
-                ('first_name', models.CharField(max_length=255)),
-                ('last_name', models.CharField(max_length=255)),
-                ('phone_number', models.CharField(max_length=9)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        primary_key=True,
+                        serialize=False,
+                        to="users.user",
+                    ),
+                ),
+                ("first_name", models.CharField(max_length=255)),
+                ("last_name", models.CharField(max_length=255)),
+                ("phone_number", models.CharField(max_length=9)),
             ],
         ),
         migrations.CreateModel(
-            name='Manager',
+            name="Manager",
             fields=[
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='users.user')),
-                ('first_name', models.CharField(max_length=255)),
-                ('last_name', models.CharField(max_length=255)),
-                ('phone_number', models.CharField(max_length=9)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        primary_key=True,
+                        serialize=False,
+                        to="users.user",
+                    ),
+                ),
+                ("first_name", models.CharField(max_length=255)),
+                ("last_name", models.CharField(max_length=255)),
+                ("phone_number", models.CharField(max_length=9)),
             ],
         ),
         migrations.CreateModel(
-            name='Teacher',
+            name="Teacher",
             fields=[
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, primary_key=True, serialize=False, to='users.user')),
-                ('first_name', models.CharField(max_length=255)),
-                ('last_name', models.CharField(max_length=255)),
-                ('phone_number', models.CharField(max_length=9)),
-                ('street', models.CharField(blank=True, max_length=255)),
-                ('postal_code', models.CharField(blank=True, max_length=6)),
-                ('city', models.CharField(blank=True, max_length=255)),
-                ('bank_account_number', models.CharField(blank=True, max_length=255)),
+                (
+                    "user",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        primary_key=True,
+                        serialize=False,
+                        to="users.user",
+                    ),
+                ),
+                ("first_name", models.CharField(max_length=255)),
+                ("last_name", models.CharField(max_length=255)),
+                ("phone_number", models.CharField(max_length=9)),
+                ("street", models.CharField(blank=True, max_length=255)),
+                ("postal_code", models.CharField(blank=True, max_length=6)),
+                ("city", models.CharField(blank=True, max_length=255)),
+                ("bank_account_number", models.CharField(blank=True, max_length=255)),
             ],
         ),
         migrations.CreateModel(
-            name='Student',
+            name="Student",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name', models.CharField(max_length=255)),
-                ('last_name', models.CharField(max_length=255)),
-                ('age', models.PositiveSmallIntegerField()),
-                ('email', models.EmailField(blank=True, max_length=254)),
-                ('phone_number', models.CharField(blank=True, max_length=9)),
-                ('guardian', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='users.guardian')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("first_name", models.CharField(max_length=255)),
+                ("last_name", models.CharField(max_length=255)),
+                ("age", models.PositiveSmallIntegerField()),
+                ("email", models.EmailField(blank=True, max_length=254)),
+                ("phone_number", models.CharField(blank=True, max_length=9)),
+                (
+                    "guardian",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="users.guardian"
+                    ),
+                ),
             ],
         ),
     ]
