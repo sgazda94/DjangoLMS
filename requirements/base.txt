@@ -11,8 +11,8 @@ django==3.2.11  # pyup: < 4.0  # https://www.djangoproject.com/
 django-environ==0.8.1  # https://github.com/joke2k/django-environ
 django-model-utils==4.2.0  # https://github.com/jazzband/django-model-utils
 django-allauth==0.49.0  # https://github.com/pennersr/django-allauth
+django-crispy-bulma==0.2.0
 django-crispy-forms==1.14.0  # https://github.com/django-crispy-forms/django-crispy-forms
-crispy-bootstrap5==0.6  # https://github.com/django-crispy-forms/crispy-bootstrap5
+# crispy-bootstrap5==0.6  # https://github.com/django-crispy-forms/crispy-bootstrap5
 django-redis==5.2.0  # https://github.com/jazzband/django-redis
 django-widget-tweaks == 1.4.12
-django-crispy-bulma==0.2.0
