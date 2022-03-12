@@ -5,7 +5,7 @@
     <h3>Course: {{ lessonscript.course }} -
     Lesson {{ lessonscript.course_order }}: {{ lessonscript.title }}</h3>
     <div>Description: {{ lessonscript.description }}</div>
-    <div>{{ lessonscript.formatted_markdown | safe}}</div>
+    <div class="container is-max-desktop">{{ lessonscript.formatted_markdown | safe}}</div>
     </div>
 lorem
 {% endblock %}

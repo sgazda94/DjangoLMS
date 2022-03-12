@@ -8,8 +8,6 @@ from django.utils.translation import gettext_lazy as _
 from .models import Guardian, Teacher, User
 
 # from django.contrib.auth import get_user_model
-
-
 # active_user = get_user_model()
 
 
