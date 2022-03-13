@@ -1,11 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+
+<!-- <div>Description: {{ lessonscript.description }}</div> -->
+<div class="container is-max-desktop">
     <div class="content">
-    <h3>Course: {{ lessonscript.course }} -
-    Lesson {{ lessonscript.course_order }}: {{ lessonscript.title }}</h3>
-    <div>Description: {{ lessonscript.description }}</div>
-    <div class="container is-max-desktop">{{ lessonscript.formatted_markdown | safe}}</div>
+        <section class="hero is-info is-small">
+            <div class="hero-body">
+                <h5 class="subtitle">Course: {{ lessonscript.course }}</h5>
+                <h3 class="title">Lesson {{ lessonscript.course_order }}: {{ lessonscript.title }}</h3>
+            </div>
+        </section>
+        {{ lessonscript.formatted_markdown | safe}}
+
     </div>
-lorem
+</div>
+
 {% endblock %}
