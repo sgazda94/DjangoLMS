@@ -8,8 +8,8 @@
     <div class="is-flex mb-3">
         <h4><a href="{{ lesson.get_absolute_url  }}">Lesson {{lesson.course_order}}: {{ lesson.title }}</a> </h4>
 
-        <a type="button" class="button is-primary mx-2" href="{{ lesson.get_absolute_url}}/update">Update</a>
-        <a type="button" class="button is-danger" href="{{ lesson.get_absolute_url}}/delete">Delete</a>
+        <a type="button" class="button is-primary is-small mx-2" href="{{ lesson.get_absolute_url}}/update">Update</a>
+        <a type="button" class="button is-danger is-small" href="{{ lesson.get_absolute_url}}/delete">Delete</a>
     </div>
     <p>Description: {{ lesson.description }}</p>
     {%  endfor %}

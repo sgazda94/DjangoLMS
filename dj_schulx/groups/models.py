@@ -40,7 +40,7 @@ class Group(models.Model):
         return reverse("groups:group-detail", kwargs={"pk": self.id})
 
     def __str__(self):
-        return f"{self.week_day} {self.course} {self.start_time} - {self.end_time}"
+        return f"{self.get_week_day_display()} /  {self.course} /  {self.start_time} - {self.end_time} "
 
 
 class Lesson(models.Model):

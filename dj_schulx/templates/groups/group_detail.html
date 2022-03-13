@@ -11,8 +11,8 @@
 
     {% for lesson in lesson_list %}
         <br>
-        <h3 class="d-inline">{{ lesson.number }}. Date: {{ lesson.date }} Time: {{ lesson.start_time }} - {{ lesson.end_time }}</h3>
-        <a  class="d-inline btn btn-success"  role="button" >Start Lesson</a>
+        <h3>{{ lesson.number }}. Date: {{ lesson.date }} Time: {{ lesson.start_time }} - {{ lesson.end_time }}</h3>
+        <a class="button is-link"  role="button" >Start Lesson</a>
         <p>Lesson Script: {{ lesson.lesson_script }}</p>
 
 

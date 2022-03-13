@@ -35,13 +35,13 @@ class GroupListView(LoginRequiredMixin, ListView):
 class GroupCreateView(CreateView):
     model = Group
     form_class = GroupForm
-    template_name = "groups/create_update_form.html"
+    template_name = "groups/group_form.html"
 
 
 class GroupUpdateView(LoginRequiredMixin, UpdateView):
     model = Group
     fields = "__all__"
-    template_name = "groups/create_update_form.html"
+    template_name = "groups/group_form.html"
 
 
 class GroupDeleteView(LoginRequiredMixin, DeleteView):
@@ -82,12 +82,13 @@ def create_lesson(request, group_id):
                 reverse("groups:lesson-detail", kwargs={"pk": lesson.id})
             )
     else:
-        form = LessonForm(user=active_user, group=group_id)
+        form = LessonForm(group=group_id, user=request.user)
+        group = Group.objects.get(id=group_id)
 
-    return render(request, "groups/create_update_form.html", {"form": form})
+    return render(request, "groups/lesson_form.html", {"form": form, "group": group})
 
 
 class LessonUpdateView(LoginRequiredMixin, UpdateView):
     model = Lesson
     fields = "__all__"
-    template_name = "groups/create_update_form.html"
+    template_name = "groups/lesson_form.html"

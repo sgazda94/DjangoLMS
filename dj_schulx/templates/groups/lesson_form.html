@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<form action="" method="post">
+    {% csrf_token %}
+
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">Group</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <p class="control">
+                    <input class="input is-static" type="email" value="{{ group }}" readonly>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- number -->
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">Teacher</label>
+        </div>
+        <div class="field-body">
+            <div class="control">
+                <div class="select">
+                    {% render_field form.teacher %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">Lesson Script</label>
+        </div>
+        <div class="field-body">
+            <div class="control">
+                <div class="select">
+                    {% render_field form.lesson_script %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">Week day</label>
+        </div>
+        <div class="field-body">
+            <div class="control">
+                {% render_field form.date class="input" %}
+            </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">Start time</label>
+        </div>
+        <div class="field-body">
+            <div class="control">
+                {% render_field form.start_time class="input" %}
+            </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">End time</label>
+        </div>
+        <div class="field-body">
+            <div class="control">
+                {% render_field form.end_time class="input" %}
+            </div>
+        </div>
+    </div>
+
+    <div class="field is-horizontal">
+        <div class="field-label">
+            <!-- Left empty for spacing -->
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    <button class="button is-primary">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+</form>
+
+
+{% endblock %}

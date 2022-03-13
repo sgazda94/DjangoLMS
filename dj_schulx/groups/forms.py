@@ -1,10 +1,13 @@
 from datetime import date
 
 from django import forms
+from django.contrib.auth import get_user_model
 
 from dj_schulx.users.models import Teacher
 
 from .models import Group, Lesson
+
+active_user = get_user_model()
 
 
 class DateInput(forms.DateInput):
@@ -32,10 +35,9 @@ class GroupForm(forms.ModelForm):
 
 
 class LessonForm(forms.ModelForm):
-    def __init__(self, *args, **kwargs):
-
-        if "user" in kwargs:
-            user = kwargs.pop("user")
+    def __init__(self, user, *args, **kwargs):
+        if "group" in kwargs:
+            # user = kwargs.pop("user")
             group = kwargs.pop("group")
             group = Group.objects.get(id=group)
             super(LessonForm, self).__init__(*args, **kwargs)
@@ -44,6 +46,7 @@ class LessonForm(forms.ModelForm):
             self.fields["start_time"].initial = group.start_time
             self.fields["end_time"].initial = group.end_time
             self.fields["date"].initial = date.today
+            # self.__init__.kwargs += {"group": group}
         else:
             super(LessonForm, self).__init__(*args, **kwargs)
 
