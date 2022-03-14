@@ -37,6 +37,9 @@ class GroupCreateView(CreateView):
     form_class = GroupForm
     template_name = "groups/group_form.html"
 
+    # def get(self, request):
+    #     user = request.user
+
 
 class GroupUpdateView(LoginRequiredMixin, UpdateView):
     model = Group

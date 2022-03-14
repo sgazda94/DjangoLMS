@@ -29,8 +29,8 @@ class GroupForm(forms.ModelForm):
         model = Group
         fields = ("course", "teacher", "week_day", "start_time", "end_time", "students")
         widgets = {
-            "start_time": forms.TimeInput(attrs={"type": "time"}),
-            "end_time": forms.TimeInput(attrs={"type": "time"}),
+            "start_time": forms.TimeInput(attrs={"type": "time", "step": 300}),
+            "end_time": forms.TimeInput(attrs={"type": "time", "step": 300}),
         }
 
 

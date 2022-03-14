@@ -1,15 +1,37 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="content">
-    {% for group in group_list %}
-        <h4><a href="{{  group.get_absolute_url }}">
-            {% if group.course != None %}
-            [{{ group.course }}] -
-            {% endif %}
-            {{ group.get_week_day_display }} {{ group.start_time }} - {{ group.end_time }} ({{ group.teacher }})</a></h4>
-    {% endfor %}
+<div class="content">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Weekday</th>
+                <th>Time</th>
+                <th>Teacher</th>
+                <th>Link</th>
+            </tr>
+        </thead>
 
-    <a  class="button is-primary" id="add_lesson"  href="{% url 'groups:group-create' %}" role="button">Add Group</a>
-    </div>
+        <tbody>
+    {% for group in group_list %}
+<tr>
+    <td>{% if group.course != None %}
+        {{ group.course }}
+        {% endif %}
+    </td>
+    <td>{{ group.get_week_day_display }}</td>
+    <td>{{ group.start_time }} - {{ group.end_time }}</td>
+    <td>{% if group.teacher != None %}
+    {{ group.teacher }}
+    {% endif %}</td>
+    <td><a class="button is-info" id="link_lesson" href="{{  group.get_absolute_url }}" role="button">Link</a>
+    </td>
+
+</tr>
+    {% endfor %}
+</tbody>
+</table>
+    <a class="button is-primary" id="add_lesson" href="{% url 'groups:group-create' %}" role="button">Add Group</a>
+</div>
 {% endblock %}

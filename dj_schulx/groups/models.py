@@ -9,13 +9,11 @@ from dj_schulx.users.models import Student, Teacher
 
 
 class Group(models.Model):
-    teacher = models.OneToOneField(
+    teacher = models.ForeignKey(
         Teacher, on_delete=models.SET_NULL, blank=True, null=True
     )
     students = models.ManyToManyField(Student, blank=True)
-    course = models.OneToOneField(
-        Course, on_delete=models.SET_NULL, blank=True, null=True
-    )
+    course = models.ForeignKey(Course, on_delete=models.SET_NULL, blank=True, null=True)
     # school
 
     MONDAY = 1
