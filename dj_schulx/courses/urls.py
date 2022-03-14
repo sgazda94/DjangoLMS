@@ -13,7 +13,7 @@ urlpatterns = [
         name="lesson-script-detail",
     ),
     path(
-        "lesson/create/",
+        "<slug:slug>/lesson/create/",
         views.LessonScriptCreateView.as_view(),
         name="lesson-script-create",
     ),
