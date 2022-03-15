@@ -24,16 +24,41 @@ class LessonScriptCreateView(CreateView):
     form_class = LessonScriptForm
     template_name = "courses/lesson_script_form.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # context["course"] = Course.objects.filter(category=self.get_object())
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     # context["course"] = Course.objects.filter(category=self.get_object())
+    #     return context
 
     def get_initial(self):
+        print(self.request.GET)
         initial = super().get_initial()
-        # initial['course'] = self.request.something
-        initial["course_order"] = 2
+        course = Course.objects.filter(slug=self.kwargs["slug"]).first()
+        initial["course"] = course
+        last_lesson_script_order = LessonScript.objects.filter(course=course)
+        if last_lesson_script_order:
+            last_lesson_script_order = last_lesson_script_order.latest(
+                "course_order"
+            ).course_order
+            last_lesson_script_order += 1
+        else:
+            last_lesson_script_order = 1
+        initial["course_order"] = last_lesson_script_order
         return initial
+
+    def form_valid(self, form):
+        data = self.request.POST
+        course_id = data["course"]
+        course_order = data["course_order"]
+        course = Course.objects.filter(id=course_id).first()
+        if LessonScript.objects.filter(
+            course=course, course_order=course_order
+        ).exists():
+            form.errors[
+                "course_order"
+            ] = "Lesson Script with that number is already created"
+            return self.form_invalid(form)
+        else:
+            return super().form_valid(form)
 
 
 class LessonScriptUpdateView(LoginRequiredMixin, UpdateView):
