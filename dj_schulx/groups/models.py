@@ -6,6 +6,7 @@ from dj_schulx.courses.models import Course, LessonScript
 from dj_schulx.users.models import Student, Teacher
 
 # Archwizacja grupy?
+# from django.core.exceptions import ValidationError
 
 
 class Group(models.Model):
@@ -58,6 +59,16 @@ class Lesson(models.Model):
 
     def __str__(self):
         return f"{self.group} / {self.number}"
+
+    def get_absolute_url(self):
+        group_id = self.group.pk
+        return reverse(
+            "groups:lesson-detail", kwargs={"pk": self.pk, "group_id": group_id}
+        )
+
+    # def clean(self):
+    #     if self.start_date >= self.end_date:
+    #         raise ValidationError("End date cannot be before start date")
 
 
 class StudentPresence(models.Model):

@@ -30,7 +30,6 @@ class LessonScriptCreateView(CreateView):
     #     return context
 
     def get_initial(self):
-        print(self.request.GET)
         initial = super().get_initial()
         course = Course.objects.filter(slug=self.kwargs["slug"]).first()
         initial["course"] = course

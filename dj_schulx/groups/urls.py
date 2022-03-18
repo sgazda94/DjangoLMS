@@ -12,10 +12,18 @@ urlpatterns = [
     path("<int:pk>/update/", views.GroupUpdateView.as_view(), name="group-update"),
     path("<int:pk>/delete/", views.GroupDeleteView.as_view(), name="group-delete"),
     # lesson
-    path("lesson/<int:pk>", views.LessonDetailView.as_view(), name="lesson-detail"),
-    path("<int:group_id>/lesson/create/", views.create_lesson, name="lesson-create"),
     path(
-        "lesson/<int:pk>/update/",
+        "<int:group_id>/lesson/<int:pk>",
+        views.LessonDetailView.as_view(),
+        name="lesson-detail",
+    ),
+    path(
+        "<int:group_id>/lesson/create/",
+        views.LessonCreateView.as_view(),
+        name="lesson-create",
+    ),
+    path(
+        "<int:group_id>/lesson/<int:pk>/update/",
         views.LessonUpdateView.as_view(),
         name="lesson-update",
     ),

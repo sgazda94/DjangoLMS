@@ -1,4 +1,5 @@
-from django.contrib.auth import get_user_model
+from datetime import date, timedelta
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
@@ -14,8 +15,10 @@ from django.views.generic import (
 
 from dj_schulx.groups.forms import GroupForm, LessonForm
 from dj_schulx.groups.models import Group, Lesson
+from dj_schulx.users.models import Teacher
 
-active_user = get_user_model()
+# from django.contrib.auth import get_user_model
+# User = get_user_model()
 # Group
 
 
@@ -69,10 +72,12 @@ class LessonDetailView(LoginRequiredMixin, DetailView):
 def create_lesson(request, group_id):
     if request.method == "POST":
         form = LessonForm(request.POST)
-
+        print(form.is_valid())
         if form.is_valid():
+            print("form valid")
             lesson = form.save(commit=False)
             group = Group.objects.get(id=group_id)
+            # print(group)
             lesson.group = group
             last_lesson_number = Lesson.objects.filter(group=group_id)
             if last_lesson_number:
@@ -81,14 +86,56 @@ def create_lesson(request, group_id):
             else:
                 lesson.number = 1
             lesson.save()
+            print("x")
             return HttpResponseRedirect(
                 reverse("groups:lesson-detail", kwargs={"pk": lesson.id})
             )
+        else:
+            group = Group.objects.get(id=group_id)
+            form = LessonForm(group=group_id, user=request.user)
     else:
-        form = LessonForm(group=group_id, user=request.user)
         group = Group.objects.get(id=group_id)
+        form = LessonForm(group=group_id, user=request.user)
 
     return render(request, "groups/lesson_form.html", {"form": form, "group": group})
+
+
+class LessonCreateView(LoginRequiredMixin, CreateView):
+    model = Lesson
+    form_class = LessonForm
+    template_name = "groups/lesson_form.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["group"] = Group.objects.get(pk=self.kwargs["group_id"])
+        return context
+
+    def get_initial(self):
+        initial = super().get_initial()
+        group = Group.objects.get(pk=self.kwargs["group_id"])
+        teacher = Teacher.objects.get(user=self.request.user)
+        initial["teacher"] = teacher
+        initial["start_time"] = group.start_time
+        initial["end_time"] = group.end_time
+        last_lesson = Lesson.objects.filter(group=group).last()
+        if last_lesson:
+            initial["date"] = last_lesson.date + timedelta(days=7)
+        else:
+            initial["date"] = date.today()
+        initial["group"] = group
+        return initial
+
+    def form_valid(self, form):
+        lesson = form.save(commit=False)
+        group = Group.objects.get(pk=self.kwargs["group_id"])
+        last_lesson = Lesson.objects.filter(group=group).last()
+        if last_lesson:
+            lesson.number = last_lesson.number + 1
+        else:
+            lesson.number = 1
+        lesson.group = group
+        lesson.save()
+        return super().form_valid(form)
 
 
 class LessonUpdateView(LoginRequiredMixin, UpdateView):

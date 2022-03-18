@@ -1,22 +1,63 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="content">
+<div class="content">
     <h1> {{ group.get_week_day_display }}</h1>
     <p>Teacher: {{ group.teacher }}</p>
     <p>Course: {{ group.course }}</p>
     <p>Time: {{group.start_time}} - {{group.end_time}}</p>
 
-    <a  class="button is-primary" id="add_lesson"  href="{{ group.id }}/lesson/create" role="button">Add Lesson</a>
+    <a class="button is-primary" id="add_lesson" href="{{ group.id }}/lesson/create" role="button">Add Lesson</a>
 
-    {% for lesson in lesson_list %}
-        <br>
-        <h3>{{ lesson.number }}. Date: {{ lesson.date }} Time: {{ lesson.start_time }} - {{ lesson.end_time }}</h3>
-        <a class="button is-link"  role="button" >Start Lesson</a>
-        <p>Lesson Script: {{ lesson.lesson_script }}</p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Uczen</th>
+                {% for lesson in lesson_list %}
+                <th>
+                    <p>
+                    {{ lesson.number }}. {{ lesson.lesson_script }}<br>
+                    {{ lesson.date }} <br>
+                    </p>
+                        <a class="button is-info is-small" id="start_lesson" href="{{ group.id }}/lesson/create" role="button">Start Lesson</a>
+                </th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>1</th>
+                <td>38</td>
+                <td>23</td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <td>38</td>
+                <td>23</td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <th>3</th>
+                <td>38</td>
+                <td>23</td>
+                <td>12</td>
+            </tr>
 
+        </tbody>
+    </table>
 
-    {%  endfor %}
-
-    </div>
+</div>
 {% endblock %}
+
+
+
+
+{% for lesson in lesson_list %}
+<br>
+<h3>{{ lesson.number }}. Date: {{ lesson.date }} Time: {{ lesson.start_time }} - {{ lesson.end_time }}</h3>
+<a class="button is-link" role="button">Start Lesson</a>
+<p>Lesson Script: {{ lesson.lesson_script }}</p>
+
+
+{% endfor %}

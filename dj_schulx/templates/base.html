@@ -26,11 +26,11 @@
 </head>
 
 <body>
-  {% include "components/header.html" %}
+  {% include "partials/header.html" %}
 
   <section class="columns is-fullheight">
     {% if user.is_authenticated %}
-    {% include "components/sidebar.html" %}
+    {% include "partials/sidebar.html" %}
     {% endif %}
 
     <main class="column section">
