@@ -1,10 +1,7 @@
 from datetime import date, timedelta
 
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -28,6 +25,7 @@ class GroupDetailView(LoginRequiredMixin, DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["lesson_list"] = Lesson.objects.filter(group=self.get_object())
+
         return context
 
 
@@ -66,38 +64,6 @@ class LessonDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         # context['lesson_list'] = Lesson.objects.filter(group=self.get_object())
         return context
-
-
-@login_required
-def create_lesson(request, group_id):
-    if request.method == "POST":
-        form = LessonForm(request.POST)
-        print(form.is_valid())
-        if form.is_valid():
-            print("form valid")
-            lesson = form.save(commit=False)
-            group = Group.objects.get(id=group_id)
-            # print(group)
-            lesson.group = group
-            last_lesson_number = Lesson.objects.filter(group=group_id)
-            if last_lesson_number:
-                last_lesson_number = last_lesson_number.latest("number").number
-                lesson.number = last_lesson_number + 1
-            else:
-                lesson.number = 1
-            lesson.save()
-            print("x")
-            return HttpResponseRedirect(
-                reverse("groups:lesson-detail", kwargs={"pk": lesson.id})
-            )
-        else:
-            group = Group.objects.get(id=group_id)
-            form = LessonForm(group=group_id, user=request.user)
-    else:
-        group = Group.objects.get(id=group_id)
-        form = LessonForm(group=group_id, user=request.user)
-
-    return render(request, "groups/lesson_form.html", {"form": form, "group": group})
 
 
 class LessonCreateView(LoginRequiredMixin, CreateView):

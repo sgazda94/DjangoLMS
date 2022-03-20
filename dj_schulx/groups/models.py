@@ -72,9 +72,9 @@ class Lesson(models.Model):
 
 
 class StudentPresence(models.Model):
-    student = models.OneToOneField(
+    student = models.ForeignKey(
         Student,
         on_delete=DO_NOTHING,
     )
-    lesson = models.OneToOneField(Lesson, on_delete=models.CASCADE)
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     is_present = models.BooleanField(default=False)
