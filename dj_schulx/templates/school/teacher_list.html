@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table class="table is-hoverable is-striped is-fullwidth">
+    <thead>
+        <tr>
+            <th>Teacher</th>
+            <th>E-mail</th>
+            <th>Phone number</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for teacher in object_list %}
+        <tr>
+            <th>{{ teacher.last_name }} {{ teacher.first_name }}</th>
+            <td>{{ teacher.email }}</td>
+            <td>{{ teacher.phone_number }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

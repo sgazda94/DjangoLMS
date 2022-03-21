@@ -7,9 +7,6 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-    path(
-        "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
-    ),
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
@@ -18,6 +15,7 @@ urlpatterns = [
     # Your stuff: custom urls includes go here
     path("courses/", include("dj_schulx.courses.urls")),
     path("groups/", include("dj_schulx.groups.urls")),
+    path("school/", include("dj_schulx.school.urls")),
     path("markdownx/", include("markdownx.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

@@ -35,7 +35,7 @@ USE_L10N = False
 # TIME_INPUT_FORMATS = ["%G:%M",]
 TIME_FORMAT = "G:i"
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-tz
-USE_TZ = True
+USE_TZ = False
 # https://docs.djangoproject.com/en/dev/ref/settings/#locale-paths
 LOCALE_PATHS = [str(ROOT_DIR / "locale")]
 
@@ -82,6 +82,7 @@ LOCAL_APPS = [
     "dj_schulx.users",
     "dj_schulx.courses",
     "dj_schulx.groups",
+    "dj_schulx.school",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

@@ -75,6 +75,7 @@ class Teacher(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     first_name = models.CharField(max_length=255, default="")
     last_name = models.CharField(max_length=255, default="")
+    email = models.EmailField(blank=True)
     phone_number = models.CharField(max_length=9)
     street = models.CharField(max_length=255, blank=True)
     postal_code = models.CharField(max_length=6, blank=True)
