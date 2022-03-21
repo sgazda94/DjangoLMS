@@ -7,16 +7,20 @@
             <th>Student</abbr></th>
             <th>Guardian</th>
             <th>Group</th>
+            <th>Group</th>
         </tr>
     </thead>
     <tbody>
-            {% for student in object_list %}
-            <tr>
+        {% for student in object_list %}
+        <tr>
             <th>{{ student.last_name }} {{ student.first_name }}</th>
             <td>{{ student.guardian }}</td>
             <td>{{ student.group }}</td>
-            </tr>
-            {% endfor %}
+            <td><a href="{{ student.}}"><button class="button is-success is-small">Add to Group</button></a></td>
+        </tr>
+        {% endfor %}
     </tbody>
 </table>
+
+
 {% endblock %}
