@@ -42,6 +42,9 @@ class Guardian(models.Model):
     last_name = models.CharField(max_length=255, default="")
     phone_number = models.CharField(max_length=9)
 
+    class Meta:
+        ordering = ["last_name"]
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
@@ -64,6 +67,9 @@ class Student(models.Model):
         Guardian, on_delete=models.CASCADE
     )  # related_name = 'guardians'
 
+    class Meta:
+        ordering = ["last_name"]
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
@@ -81,6 +87,9 @@ class Teacher(models.Model):
     postal_code = models.CharField(max_length=6, blank=True)
     city = models.CharField(max_length=255, blank=True)
     bank_account_number = models.CharField(max_length=255, blank=True)
+
+    class Meta:
+        ordering = ["last_name"]
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

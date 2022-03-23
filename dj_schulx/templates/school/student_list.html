@@ -1,12 +1,24 @@
 {% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
 
 {% block content %}
+<div class="is-flex is-justify-content-flex-end">
+        <button class="js-modal-trigger button is-primary " data-target="modal-js-example">
+            <span class="icon is-small">
+                <ion-icon name="person-add-outline"></ion-icon>
+            </span>
+            <span>
+                Add Student to Group
+            </span>
+        </button>
+    </div>
+
 <table class="table is-hoverable is-striped is-fullwidth">
     <thead>
         <tr>
             <th>Student</abbr></th>
             <th>Guardian</th>
-            <th>Group</th>
             <th>Group</th>
         </tr>
     </thead>
@@ -15,12 +27,72 @@
         <tr>
             <th>{{ student.last_name }} {{ student.first_name }}</th>
             <td>{{ student.guardian }}</td>
-            <td>{{ student.group }}</td>
-            <td><a href="{{ student.}}"><button class="button is-success is-small">Add to Group</button></a></td>
+            <td>{% if student.group is None %}
+                No group found
+                {% else %}
+                {{ student.group }}
+                {% endif %}
+            </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
 
+<div id="modal-js-example" class="modal">
+    <div class="modal-background"></div>
 
+    <div class="modal-content">
+        <div class="box">
+            <form action="{% url 'school:add-to-group' %}" method="post">
+                {% csrf_token %}
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label">Group</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field is-narrow">
+                            <div class="control">
+                                <div class="select is-fullwidth">
+                                    {% render_field form.group %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                        <label class="label">Student</label>
+                    </div>
+                    <div class="field-body">
+                        <div class="field is-narrow">
+                            <div class="control">
+                                <div class="select is-fullwidth">
+                                    {% render_field form.student %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field is-horizontal">
+                    <div class="field-label">
+                        <!-- Left empty for spacing -->
+                    </div>
+                    <div class="field-body">
+                        <div class="field">
+                            <div class="control">
+                                <button class="button is-primary">
+                                    Add to Group
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <button class="modal-close is-large" aria-label="close"></button>
+</div>
+
+<script src="{% static 'js/modal.js' %}"></script>
 {% endblock %}

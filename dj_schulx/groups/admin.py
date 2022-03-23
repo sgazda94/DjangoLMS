@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Group, Lesson
+from .models import Group, Lesson, StudentPresence
 
 
 class GroupAdmin(admin.ModelAdmin):
@@ -15,3 +15,10 @@ class LessonAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Lesson, LessonAdmin)
+
+
+class StudentPresenceAdmin(admin.ModelAdmin):
+    list_display = ("lesson", "student")
+
+
+admin.site.register(StudentPresence, StudentPresenceAdmin)

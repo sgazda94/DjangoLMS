@@ -11,7 +11,7 @@ from django.views.generic import (
 )
 
 from dj_schulx.groups.forms import GroupForm, LessonForm
-from dj_schulx.groups.models import Group, Lesson
+from dj_schulx.groups.models import Group, Lesson, StudentPresence
 from dj_schulx.users.models import Teacher
 
 # from django.contrib.auth import get_user_model
@@ -101,6 +101,9 @@ class LessonCreateView(LoginRequiredMixin, CreateView):
             lesson.number = 1
         lesson.group = group
         lesson.save()
+        for student in group.students.all():
+            StudentPresence.objects.create(student=student, lesson=lesson)
+            print("dodano obecnosc")
         return super().form_valid(form)
 
 

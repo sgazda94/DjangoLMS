@@ -35,6 +35,9 @@ class Group(models.Model):
     start_time = models.TimeField()
     end_time = models.TimeField()
 
+    class Meta:
+        ordering = ("week_day",)
+
     def get_absolute_url(self):
         return reverse("groups:group-detail", kwargs={"pk": self.id})
 

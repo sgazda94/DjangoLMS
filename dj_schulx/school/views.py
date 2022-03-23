@@ -1,7 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
+from django.views.generic.edit import FormView
 
-from dj_schulx.groups.models import Group
+from dj_schulx.groups.models import Group, Lesson, StudentPresence
+from dj_schulx.school.forms import AddStudentToGroupForm
 from dj_schulx.users.models import Guardian, Student, Teacher
 
 
@@ -12,9 +14,30 @@ class StudentListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         for obj in queryset:
-            group = Group.objects.get(students=obj)
+            group = Group.objects.filter(students=obj).first()
             obj.group = group
         return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = AddStudentToGroupForm
+        return context
+
+
+class AddStudentToGroupView(FormView):
+    success_url = "/school/students/"
+    form_class = AddStudentToGroupForm
+
+    def form_valid(self, form):
+        data = form.data
+        group = Group.objects.get(pk=data["group"])
+        student = Student.objects.get(pk=data["student"])
+        if not group.students.filter(pk=student.pk).exists():
+            group.students.add(student)
+            lessons = Lesson.objects.filter(group=group.pk)
+            for lesson in lessons:
+                StudentPresence.objects.create(student=student, lesson=lesson)
+        return super().form_valid(form)
 
 
 class TeacherListView(LoginRequiredMixin, ListView):
