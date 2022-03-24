@@ -27,4 +27,9 @@ urlpatterns = [
         views.LessonUpdateView.as_view(),
         name="lesson-update",
     ),
+    path(
+        "<int:group_id>/lesson/<int:pk>/start",
+        views.StartLessonView.as_view(),
+        name="lesson-start",
+    ),
 ]

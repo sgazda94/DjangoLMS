@@ -9,6 +9,7 @@ from django.views.generic import (
     ListView,
     UpdateView,
 )
+from django.views.generic.edit import FormView
 
 from dj_schulx.groups.forms import GroupForm, LessonForm
 from dj_schulx.groups.models import Group, Lesson, StudentPresence
@@ -111,3 +112,16 @@ class LessonUpdateView(LoginRequiredMixin, UpdateView):
     model = Lesson
     fields = "__all__"
     template_name = "groups/lesson_form.html"
+
+
+class StartLessonView(FormView):
+    success_url = "/groups/"
+    template_name = "groups/new_lesson.html"
+    # form_class = StartLessonForm
+
+    # def get(self, request, *args, **kwargs):
+    #     lesson =  Lesson.objects.get(pk=self.kwargs['pk'])
+    #     print(lesson)
+
+    def form_valid(self, form):
+        pass

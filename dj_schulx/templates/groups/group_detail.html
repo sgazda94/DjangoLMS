@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
 
 {% block content %}
 <div class="content">
@@ -19,8 +21,9 @@
                         {{ lesson.number }}. {{ lesson.lesson_script }}<br>
                         {{ lesson.date }} <br>
                     </p>
-                    <a class="button is-info is-small" id="start_lesson" href="{{ group.id }}/lesson/create"
-                        role="button">Start Lesson</a>
+
+                    <a class="js-modal-trigger button is-info is-small" id="start-lesson-{{lesson.pk}}" href="{{ group.id }}/lesson/{{ lesson.pk }}/start"
+                        role="button" data-target="start-lesson">Start Lesson</a>
                 </th>
                 {% endfor %}
             </tr>
@@ -36,6 +39,7 @@
             {% endfor %}
         </tbody>
     </table>
-
 </div>
+
+<script src="{% static 'js/modal.js' %}"></script>
 {% endblock %}
