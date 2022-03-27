@@ -29,7 +29,7 @@ urlpatterns = [
     ),
     path(
         "<int:group_id>/lesson/<int:pk>/start",
-        views.StartLessonView.as_view(),
+        views.LessonStartView.as_view(),
         name="lesson-start",
     ),
 ]

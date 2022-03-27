@@ -44,5 +44,13 @@ class LessonForm(forms.ModelForm):
         }
 
 
-class StartLessonForm(forms.Form):
-    pass
+class LessonStartForm(forms.Form):
+    def __init__(self, *args, **kwargs):
+        # lesson = kwargs.pop('lesson')
+        presences = kwargs.pop("presences")
+        super().__init__(*args, **kwargs)
+        for presence in presences:
+            self.fields[f"{presence.pk}"] = forms.BooleanField(
+                label=f"{presence.student}", required=False
+            )
+            self.fields[f"{presence.pk}"].initial = presence.is_present

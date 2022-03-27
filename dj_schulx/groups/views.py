@@ -11,7 +11,7 @@ from django.views.generic import (
 )
 from django.views.generic.edit import FormView
 
-from dj_schulx.groups.forms import GroupForm, LessonForm
+from dj_schulx.groups.forms import GroupForm, LessonForm, LessonStartForm
 from dj_schulx.groups.models import Group, Lesson, StudentPresence
 from dj_schulx.users.models import Teacher
 
@@ -114,14 +114,29 @@ class LessonUpdateView(LoginRequiredMixin, UpdateView):
     template_name = "groups/lesson_form.html"
 
 
-class StartLessonView(FormView):
-    success_url = "/groups/"
-    template_name = "groups/new_lesson.html"
-    # form_class = StartLessonForm
+class LessonStartView(FormView):
+    success_url = "/"
+    template_name = "groups/lesson_new.html"
+    form_class = LessonStartForm
 
-    # def get(self, request, *args, **kwargs):
-    #     lesson =  Lesson.objects.get(pk=self.kwargs['pk'])
-    #     print(lesson)
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        lesson = Lesson.objects.get(pk=self.kwargs["pk"])
+        # kwargs["lesson"] = lesson
+        kwargs["presences"] = StudentPresence.objects.filter(lesson=lesson.pk)
+        return kwargs
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["lesson"] = Lesson.objects.get(pk=self.kwargs["pk"])
+        return context
 
     def form_valid(self, form):
-        pass
+        data = form.cleaned_data
+        lesson = Lesson.objects.get(pk=self.kwargs["pk"])
+        presences = StudentPresence.objects.filter(lesson=lesson.pk)
+        for pk, val_bool in data.items():
+            presence = presences.get(id=pk)
+            presence.is_present = val_bool
+            presence.save()
+        return super().form_valid(form)
