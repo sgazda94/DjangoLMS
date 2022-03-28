@@ -2,6 +2,7 @@ from datetime import date, timedelta
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from django.urls.base import reverse
 from django.views.generic import (
     CreateView,
     DeleteView,
@@ -25,8 +26,15 @@ class GroupDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["lesson_list"] = Lesson.objects.filter(group=self.get_object())
-
+        group = self.get_object()
+        lessons = Lesson.objects.filter(group=group)
+        context["lesson_list"] = lessons
+        students = group.students.all()
+        for student in students:
+            student.presences = StudentPresence.objects.filter(
+                student=student
+            ).order_by("lesson__number")
+        context["students"] = students
         return context
 
 
@@ -115,9 +123,11 @@ class LessonUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class LessonStartView(FormView):
-    success_url = "/"
     template_name = "groups/lesson_new.html"
     form_class = LessonStartForm
+
+    def get_success_url(self):
+        return reverse("groups:group-detail", kwargs={"pk": self.kwargs["group_id"]})
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -134,6 +144,11 @@ class LessonStartView(FormView):
     def form_valid(self, form):
         data = form.cleaned_data
         lesson = Lesson.objects.get(pk=self.kwargs["pk"])
+        if lesson.is_started is False:
+            lesson.is_started = True
+        elif lesson.is_started is True:
+            lesson.is_ended = True
+        lesson.save()
         presences = StudentPresence.objects.filter(lesson=lesson.pk)
         for pk, val_bool in data.items():
             presence = presences.get(id=pk)

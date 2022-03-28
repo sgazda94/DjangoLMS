@@ -9,31 +9,48 @@
     <p>Course: {{ group.course }}</p>
     <p>Time: {{group.start_time}} - {{group.end_time}}</p>
 
-    <a class="button is-primary" id="add_lesson" href="{{ group.id }}/lesson/create" role="button">Add Lesson</a>
+    <a class="button is-primary mb-2" id="add_lesson" href="{{ group.id }}/lesson/create" role="button">Add Lesson</a>
 
-    <table class="table">
+    <table class="table is-bordered">
         <thead>
             <tr>
-                <th>Uczen</th>
+                <th>Student</th>
                 {% for lesson in lesson_list %}
                 <th>
                     <p>
                         {{ lesson.number }}. {{ lesson.lesson_script }}<br>
                         {{ lesson.date }} <br>
                     </p>
+                    {% if lesson.is_ended %}
+                    <a class="button is-info is-small" id="start-lesson-{{lesson.pk}}"
+                        href="{{ group.id }}/lesson/{{ lesson.pk }}/start" role="button">Edit Lesson</a>
+                    {% elif lesson.is_started %}
+                    <a class="button is-danger is-small" id="start-lesson-{{lesson.pk}}"
+                        href="{{ group.id }}/lesson/{{ lesson.pk }}/start" role="button">End Lesson</a>
 
-                    <a class="js-modal-trigger button is-info is-small" id="start-lesson-{{lesson.pk}}" href="{{ group.id }}/lesson/{{ lesson.pk }}/start"
-                        role="button" data-target="start-lesson">Start Lesson</a>
+                    {% else %}
+                    <a class="button is-success is-small" id="start-lesson-{{lesson.pk}}"
+                        href="{{ group.id }}/lesson/{{ lesson.pk }}/start" role="button">Start Lesson</a>
+                    {% endif %}
                 </th>
                 {% endfor %}
             </tr>
         </thead>
         <tbody>
-            {% for student in group.students.all %}
+            {% for student in students %}
             <tr>
                 <th>{{student}}</th>
-                {% for lesson in lesson_list %}
-                <td> x </td>
+                {% for presence in student.presences %}
+                {% if presence.is_present %}
+                <td>
+                    <span class="icon has-text-success">
+                        <ion-icon size="large" name="checkbox"></ion-icon>
+                    </span>
+                </td>
+                {% else %}
+                <td>  </td>
+                {% endif %}
+
                 {% endfor %}
             </tr>
             {% endfor %}

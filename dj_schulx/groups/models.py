@@ -60,6 +60,9 @@ class Lesson(models.Model):
     is_started = models.BooleanField(default=False)
     is_ended = models.BooleanField(default=False)
 
+    class Meta:
+        ordering = ("number",)
+
     def __str__(self):
         return f"{self.group} / {self.number}"
 

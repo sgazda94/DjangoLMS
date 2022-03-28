@@ -7,6 +7,7 @@
             <th>Teacher</th>
             <th>E-mail</th>
             <th>Phone number</th>
+            <th>Address</th>
         </tr>
     </thead>
     <tbody>
@@ -15,6 +16,7 @@
             <th>{{ teacher.last_name }} {{ teacher.first_name }}</th>
             <td>{{ teacher.email }}</td>
             <td>{{ teacher.phone_number }}</td>
+            <td>{{ teacher.street }} {{ teacher.postal_code }} {{ teacher.city }}</td>
         </tr>
         {% endfor %}
     </tbody>
