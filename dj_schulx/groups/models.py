@@ -72,6 +72,7 @@ class Lesson(models.Model):
             "groups:lesson-detail", kwargs={"pk": self.pk, "group_id": group_id}
         )
 
+    # dodać walidacje czasu
     # def clean(self):
     #     if self.start_date >= self.end_date:
     #         raise ValidationError("End date cannot be before start date")

@@ -16,8 +16,6 @@ from dj_schulx.groups.forms import GroupForm, LessonForm, LessonStartForm
 from dj_schulx.groups.models import Group, Lesson, StudentPresence
 from dj_schulx.users.models import Teacher
 
-# from django.contrib.auth import get_user_model
-# User = get_user_model()
 # Group
 
 
@@ -47,9 +45,6 @@ class GroupCreateView(CreateView):
     form_class = GroupForm
     template_name = "groups/group_form.html"
 
-    # def get(self, request):
-    #     user = request.user
-
 
 class GroupUpdateView(LoginRequiredMixin, UpdateView):
     model = Group
@@ -68,11 +63,6 @@ class GroupDeleteView(LoginRequiredMixin, DeleteView):
 
 class LessonDetailView(LoginRequiredMixin, DetailView):
     model = Lesson
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # context['lesson_list'] = Lesson.objects.filter(group=self.get_object())
-        return context
 
 
 class LessonCreateView(LoginRequiredMixin, CreateView):
@@ -112,7 +102,6 @@ class LessonCreateView(LoginRequiredMixin, CreateView):
         lesson.save()
         for student in group.students.all():
             StudentPresence.objects.create(student=student, lesson=lesson)
-            print("dodano obecnosc")
         return super().form_valid(form)
 
 
@@ -132,7 +121,6 @@ class LessonStartView(FormView):
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         lesson = Lesson.objects.get(pk=self.kwargs["pk"])
-        # kwargs["lesson"] = lesson
         kwargs["presences"] = StudentPresence.objects.filter(lesson=lesson.pk)
         return kwargs
 
@@ -150,8 +138,8 @@ class LessonStartView(FormView):
             lesson.is_ended = True
         lesson.save()
         presences = StudentPresence.objects.filter(lesson=lesson.pk)
-        for pk, val_bool in data.items():
+        for pk, is_present in data.items():
             presence = presences.get(id=pk)
-            presence.is_present = val_bool
+            presence.is_present = is_present
             presence.save()
         return super().form_valid(form)

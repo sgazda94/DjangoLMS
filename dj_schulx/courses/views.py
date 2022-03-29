@@ -24,11 +24,6 @@ class LessonScriptCreateView(CreateView):
     form_class = LessonScriptForm
     template_name = "courses/lesson_script_form.html"
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     # context["course"] = Course.objects.filter(category=self.get_object())
-    #     return context
-
     def get_initial(self):
         initial = super().get_initial()
         course = Course.objects.filter(slug=self.kwargs["slug"]).first()

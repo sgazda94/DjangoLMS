@@ -10,7 +10,3 @@ class LessonScriptForm(forms.ModelForm):
     class Meta:
         model = LessonScript
         fields = "__all__"
-
-
-# class LessonUpdateForm(forms.Form):
-#     bar = forms.CharField(widget=SummernoteInplaceWidget())

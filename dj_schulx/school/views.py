@@ -29,9 +29,9 @@ class AddStudentToGroupView(FormView):
     form_class = AddStudentToGroupForm
 
     def form_valid(self, form):
-        data = form.data
-        group = Group.objects.get(pk=data["group"])
-        student = Student.objects.get(pk=data["student"])
+        data = form.cleaned_data
+        group = data["group"]
+        student = data["student"]
         if not group.students.filter(pk=student.pk).exists():
             group.students.add(student)
             lessons = Lesson.objects.filter(group=group.pk)
