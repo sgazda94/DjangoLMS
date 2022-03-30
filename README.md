@@ -8,7 +8,7 @@ Dj_schulx is a Learning Managment System (LMS) project for educational purposes.
 📎 Main features:
 
 - organization of courses
-- making lessons plans in Markdown
+- making lesson plans in Markdown
 - organization student groups, presence checking
 - lesson planning (date, time) for specific groups
 
