@@ -22,7 +22,7 @@ Dj_schulx is a Learning Managment System (LMS) project for educational purposes.
 📄 Tasks to do:
 
 - [ ] Add HTMX requests
-- [ ] Add persmision based on role
+- [ ] Add persmission based on role
 - [ ] Write tests
 - [ ] Refactor users/schools duplicate views (student/guardian/teacher views)
 - [ ] Many more 👋
