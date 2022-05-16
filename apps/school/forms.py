@@ -1,8 +1,8 @@
 from django import forms
 from django.contrib.auth import get_user_model
 
-from dj_schulx.groups.models import Group
-from dj_schulx.users.models import Student
+from apps.groups.models import Group
+from apps.users.models import Student
 
 User = get_user_model()
 

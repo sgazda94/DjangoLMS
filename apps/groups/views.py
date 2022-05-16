@@ -12,9 +12,9 @@ from django.views.generic import (
 )
 from django.views.generic.edit import FormView
 
-from dj_schulx.groups.forms import GroupForm, LessonForm, LessonStartForm
-from dj_schulx.groups.models import Group, Lesson, StudentPresence
-from dj_schulx.users.models import Teacher
+from apps.groups.forms import GroupForm, LessonForm, LessonStartForm
+from apps.groups.models import Group, Lesson, StudentPresence
+from apps.users.models import Teacher
 
 # Group
 

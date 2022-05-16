@@ -2,9 +2,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView
 from django.views.generic.edit import FormView
 
-from dj_schulx.groups.models import Group, Lesson, StudentPresence
-from dj_schulx.school.forms import AddStudentToGroupForm
-from dj_schulx.users.models import Guardian, Student, Teacher
+from apps.groups.models import Group, Lesson, StudentPresence
+from apps.school.forms import AddStudentToGroupForm
+from apps.users.models import Guardian, Student, Teacher
 
 
 class StudentListView(LoginRequiredMixin, ListView):

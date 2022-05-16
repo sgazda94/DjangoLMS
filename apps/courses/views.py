@@ -8,8 +8,8 @@ from django.views.generic import (
     UpdateView,
 )
 
-from dj_schulx.courses.forms import LessonScriptForm
-from dj_schulx.courses.models import Category, Course, LessonScript
+from apps.courses.forms import LessonScriptForm
+from apps.courses.models import Category, Course, LessonScript
 
 
 # from django.shortcuts import render

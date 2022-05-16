@@ -8,10 +8,10 @@ from django.http import HttpRequest, HttpResponseRedirect
 from django.test import RequestFactory
 from django.urls import reverse
 
-from dj_schulx.users.forms import UserAdminChangeForm
-from dj_schulx.users.models import User
-from dj_schulx.users.tests.factories import UserFactory
-from dj_schulx.users.views import UserRedirectView, UserUpdateView, user_detail_view
+from apps.users.forms import UserAdminChangeForm
+from apps.users.models import User
+from apps.users.tests.factories import UserFactory
+from apps.users.views import UserRedirectView, UserUpdateView, user_detail_view
 
 pytestmark = pytest.mark.django_db
 

@@ -1,6 +1,6 @@
 import pytest
 
-from dj_schulx.users.models import User
+from apps.users.models import User
 
 pytestmark = pytest.mark.django_db
 

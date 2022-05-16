@@ -2,7 +2,7 @@ from django.urls import path
 
 from . import views
 
-# from dj_schulx.users.views import (
+# from apps.users.views import (
 #     user_detail_view,
 #     user_redirect_view,
 #     user_update_view,

@@ -2,8 +2,8 @@ from django.db import models
 from django.db.models import DO_NOTHING
 from django.urls import reverse
 
-from dj_schulx.courses.models import Course, LessonScript
-from dj_schulx.users.models import Student, Teacher
+from apps.courses.models import Course, LessonScript
+from apps.users.models import Student, Teacher
 
 # Archwizacja grupy?
 # from django.core.exceptions import ValidationError

@@ -2,8 +2,8 @@ from django.contrib import admin
 from django.contrib.auth import admin as auth_admin
 from django.utils.translation import gettext_lazy as _
 
-from dj_schulx.users.forms import UserAdminChangeForm, UserAdminCreationForm
-from dj_schulx.users.models import Guardian, Manager, Student, Teacher, User
+from apps.users.forms import UserAdminChangeForm, UserAdminCreationForm
+from apps.users.models import Guardian, Manager, Student, Teacher, User
 
 # from django.contrib.auth import get_user_model
 # User = get_user_model()

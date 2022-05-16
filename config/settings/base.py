@@ -7,7 +7,7 @@ import environ
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # dj_schulx/
-APPS_DIR = ROOT_DIR / "dj_schulx"
+APPS_DIR = ROOT_DIR / "apps"
 env = environ.Env()
 
 READ_DOT_ENV_FILE = env.bool("DJANGO_READ_DOT_ENV_FILE", default=False)
@@ -79,10 +79,10 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    "dj_schulx.users",
-    "dj_schulx.courses",
-    "dj_schulx.groups",
-    "dj_schulx.school",
+    "apps.users",
+    "apps.courses",
+    "apps.groups",
+    "apps.school",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -91,7 +91,7 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 # MIGRATIONS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
-MIGRATION_MODULES = {"sites": "dj_schulx.contrib.sites.migrations"}
+MIGRATION_MODULES = {"sites": "apps.contrib.sites.migrations"}
 
 # AUTHENTICATION
 # ------------------------------------------------------------------------------
@@ -185,7 +185,7 @@ TEMPLATES = [
                 "django.template.context_processors.static",
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
-                "dj_schulx.users.context_processors.allauth_settings",
+                "apps.users.context_processors.allauth_settings",
             ],
         },
     }
@@ -264,8 +264,8 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_EMAIL_VERIFICATION = "optional"
 ACCOUNT_USERNAME_REQUIRED = False
 
-ACCOUNT_ADAPTER = "dj_schulx.users.adapters.AccountAdapter"
-ACCOUNT_FORMS = {"signup": "dj_schulx.users.forms.UserSignupForm"}
+ACCOUNT_ADAPTER = "apps.users.adapters.AccountAdapter"
+ACCOUNT_FORMS = {"signup": "apps.users.forms.UserSignupForm"}
 
-SOCIALACCOUNT_ADAPTER = "dj_schulx.users.adapters.SocialAccountAdapter"
-SOCIALACCOUNT_FORMS = {"signup": "dj_schulx.users.forms.UserSocialSignupForm"}
+SOCIALACCOUNT_ADAPTER = "apps.users.adapters.SocialAccountAdapter"
+SOCIALACCOUNT_FORMS = {"signup": "apps.users.forms.UserSocialSignupForm"}

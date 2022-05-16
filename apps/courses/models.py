@@ -4,7 +4,7 @@ from django.utils.text import slugify
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
 
-from dj_schulx.users.models import User
+from apps.users.models import User
 
 
 class Category(models.Model):
