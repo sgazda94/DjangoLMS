@@ -1,9 +1,9 @@
-# dj_schulx
+# DjangoLMS
 
 [![Built with Cookiecutter Django](https://img.shields.io/badge/built%20with-Cookiecutter%20Django-ff69b4.svg?logo=cookiecutter)](https://github.com/cookiecutter/cookiecutter-django/)
 [![Black code style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 
-Dj_schulx is a Learning Managment System (LMS) project for educational purposes.
+DjangoLMS is a Learning Managment System (LMS) project for educational purposes.
 
 📎 Main features:
 
